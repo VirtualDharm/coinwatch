@@ -45,7 +45,7 @@ export class PriceTrackerService {
     this.logger.log(`Saved price for ${chain}: ${price}`);
   }
 
-  // Retrieves hourly prices for the last 24 hours
+  // Retrieves hourly prices for the last 100 hours
   async getHourlyPrices(chain: string) {
     const query = `
       SELECT date_trunc('hour', timestamp) as hour, AVG(price) as average_price

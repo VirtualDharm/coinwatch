@@ -9,7 +9,7 @@ export class PriceTrackerController {
   constructor(private readonly priceTrackerService: PriceTrackerService) {}
 
   @Get('hourly')
-  @ApiOperation({ summary: 'Get hourly prices for the last 24 hours' })
+  @ApiOperation({ summary: 'Get hourly prices for the last 100 hours' })
   @ApiResponse({ status: 200, description: 'Successful retrieval of prices.' })
   async getHourlyPrices(@Query('chain') chain: string) {
     return await this.priceTrackerService.getHourlyPrices(chain);
