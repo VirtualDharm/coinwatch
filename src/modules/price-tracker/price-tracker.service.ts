@@ -47,14 +47,15 @@ export class PriceTrackerService {
 
   // Retrieves hourly prices for the last 24 hours
   async getHourlyPrices(chain: string) {
-    const prices = await this.connection.query(
-      `SELECT date_trunc('hour', timestamp) as hour, AVG(price) as average_price
-       FROM price
-       WHERE chain = $1 AND timestamp >= NOW() - INTERVAL '24 HOURS'
-       GROUP BY hour
-       ORDER BY hour ASC`,
-      [chain],
-    );
+    const query = `
+      SELECT date_trunc('hour', timestamp) as hour, AVG(price) as average_price
+      FROM price
+      WHERE chain = $1 AND timestamp >= NOW() - INTERVAL '1000 HOURS'
+      GROUP BY hour
+      ORDER BY hour ASC
+    `;
+  
+    const prices = await this.connection.query(query, [chain]);
     return prices;
   }
 

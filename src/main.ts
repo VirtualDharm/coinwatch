@@ -9,6 +9,12 @@ async function bootstrap() {
   dotenv.config(); // Load environment variables
   const app = await NestFactory.create(AppModule);
 
+
+  app.enableCors({
+    origin: 'http://localhost:3001', // Replace with your frontend URL
+    credentials: true,
+  });
+
   // Set up Swagger documentation
   const config = new DocumentBuilder()
     .setTitle('CoinWatch')
